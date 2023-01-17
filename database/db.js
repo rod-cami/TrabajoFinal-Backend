@@ -8,6 +8,6 @@ const connectDB = async () => {
     console.log('No Conectada')
   }
 }
- connectDB();
 
- module.exports = { connectDB }
+connectDB();
+module.exports = { connectDB }
