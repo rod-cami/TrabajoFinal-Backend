@@ -1,58 +1,11 @@
 const express = require('express');
+const { obtenerMenus, obtenerUnMenu, crearMenu, modificarMenu, borrarMenu } = require('../controllers/menus');
 const route = express.Router();
-const Menu = require('../model/menus');
 
-route.get('/obtenerMenus', async (req,res) => {
-  const menues = await Menu.find({});
-  res.json(menues);
-
-});
-
-route.get('/obtenerUnMenu/:menuId', async (req,res) => {
-  const menues = await Menu.findById(req.params.menuId);
-  res.json(menues);
-});
-
-route.post('/crearMenu', async (req,res) => {
-  const {nombre,estado,precio,detalle,ingredientes,categoria,imagen} = req.body;
-  let arrayIngredientes = ingredientes.split(',')
-  const nuevoMenu = new Menu({
-    nombre,
-    estado,
-    precio,
-    detalle,
-    ingredientes : arrayIngredientes,
-    categoria,
-    imagen
-  })
-
-  await nuevoMenu.save()
-
-  res.json({
-    mensaje: `Menu ${nombre} creado con éxito`
-  })
-})
-
-route.put('/modificarMenu/:menuId', async (req,res) =>{
-  const {_id,nombre,estado,precio,detalle,ingredientes,categoria,imagen} = req.body;
-  let arrayIngredientes = ingredientes.split(',')
-  const menuMod = await Menu.findByIdAndUpdate(req.params.menuId, {
-    _id,
-    nombre,
-    estado,
-    precio,
-    detalle,
-    ingredientes : arrayIngredientes,
-    categoria,
-    imagen
-  })
-
-  res.json(menuMod)
-})
-
-route.delete('/borrarMenu/:menuID', async (req,res) =>{
-  const menuDel = await Menu.findByIdAndDelete(req.params.menuID);
-  res.json(menuDel);
-})
+route.get('/obtenerMenus', obtenerMenus);
+route.get('/obtenerUnMenu/:menuId', obtenerUnMenu);
+route.post('/crearMenu', crearMenu)
+route.put('/modificarMenu/:menuId', modificarMenu)
+route.delete('/borrarMenu/:menuID', borrarMenu)
 
 module.exports = route;
