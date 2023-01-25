@@ -3,7 +3,6 @@ const Menu = require('../model/menus');
 const obtenerMenus = async (req,res) => {
   const menues = await Menu.find({});
   res.json(menues);
-
 }
 
 const obtenerUnMenu = async (req,res) => {
