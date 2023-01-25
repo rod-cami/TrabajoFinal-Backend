@@ -1,28 +1,11 @@
 const express = require('express');
+const { obtenerMenus, obtenerUnMenu, crearMenu, modificarMenu, borrarMenu } = require('../controllers/menus');
 const route = express.Router();
-const Menu = require('../model/menus');
 
-route.get('/obtenerMenues', (req,res) => {
-  res.send('info obtenida')
-});
-
-route.post('/crearMenu', async (req,res) => {
-  const {nombre,estado,precio,detalle,ingredientes,categoria} = req.body;
-
-  const nuevoMenu = new Menu({
-    nombre,
-    estado,
-    precio,
-    detalle,
-    ingredientes,
-    categoria
-  })
-
-  await nuevoMenu.save()
-
-  res.json({
-    mensaje: `Menu ${nombre} creado con éxito`
-  })
-})
+route.get('/obtenerMenus', obtenerMenus);
+route.get('/obtenerUnMenu/:menuId', obtenerUnMenu);
+route.post('/crearMenu', crearMenu)
+route.put('/modificarMenu/:menuId', modificarMenu)
+route.delete('/borrarMenu/:menuID', borrarMenu)
 
 module.exports = route;
