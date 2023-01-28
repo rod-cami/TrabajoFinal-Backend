@@ -1,28 +1,11 @@
 const express = require('express');
+const { obtenerUsuarios, crearUsuario, obtenerUnUsuario, modificarUsuario, borrarUsuario } = require('../controllers/usuarios');
 const route = express.Router();
-const User = require('../model/usuarios');
 
-route.get('/obtenerUsuarios', (req,res) => {
-  res.send('info obtenida')
-});
-
-route.post('/crearUsuario', async (req,res) => {
-  const {nombre,apellido,email,password,estado,rol} = req.body;
-
-  const nuevoUsuario = new User({
-    nombre,
-    apellido,
-    email,
-    password,
-    estado,
-    rol
-  })
-
-  await nuevoUsuario.save()
-
-  res.json({
-    mensaje: `Usuario ${nombre} creado con éxito`
-  })
-})
+route.get('/obtenerUsuarios',obtenerUsuarios);
+route.get('/obtenerUnUsuario/:userId', obtenerUnUsuario);
+route.post('/crearUsuario', crearUsuario);
+route.put('/modificarUsuario/:userId', modificarUsuario);
+route.delete('/borrarUsuario/:userId', borrarUsuario);
 
 module.exports = route;
