@@ -37,9 +37,10 @@ const crearUsuario = async (req,res) => {
 
 const modificarUsuario = async (req,res) =>{
   const {nombre,apellido,email,estado,rol} = req.body;
-  const result = await User.findOne({email});
-
-  if (result) {
+  const result = await User.find({email:email});
+  const result2 = await User.findById(req.params.userId)
+  
+  if (result && email !== result2.email) {
     res.status(400).send({message : 'Ya existe un usuario con este email'})
     
   } else {
@@ -53,7 +54,6 @@ const modificarUsuario = async (req,res) =>{
   
     res.json(userMod)
   }
-  
 }
 
 const borrarUsuario = async (req,res) =>{
