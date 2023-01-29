@@ -1,10 +1,10 @@
 const express = require('express');
+const { obtenerPedidos, modificarPedido } = require('../controllers/pedidos');
 const route = express.Router();
 const Pedido = require('../model/pedidos');
 
-route.get('/obtenerMenues', (req,res) => {
-  res.send('info obtenida')
-});
+route.get('/obtenerPedidos', obtenerPedidos);
+route.put('/modificarEstadoPedido/:pedidoId', modificarPedido)
 
 route.post('/crearPedido', async (req,res) => {
   const {_id,usuarioID,fecha,carrito,estado,total} = req.body;
