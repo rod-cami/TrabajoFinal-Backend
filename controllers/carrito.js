@@ -10,4 +10,18 @@ const obtenerUnCarrito = async (req,res) => {
   res.json(carrito);
 }
 
-module.exports = {obtenerCarritos , obtenerUnCarrito}
+const borrarCarrito = async (req,res) =>{
+  const carritoDel = await Carrito.findByIdAndDelete(req.params.carritoID);
+  res.json(carritoDel);
+}
+
+const modificarCarrito = async (req,res) =>{
+  const {estado} = req.body;
+  const userMod = await Carrito.findByIdAndUpdate(req.params.carritoId, {
+    estado
+  })
+
+  res.json(userMod)
+}
+
+module.exports = {obtenerCarritos , obtenerUnCarrito, borrarCarrito,modificarCarrito} 

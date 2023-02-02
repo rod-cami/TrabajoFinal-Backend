@@ -19,4 +19,24 @@ const modificarPedido = async (req,res) =>{
   res.json(pedidoMod)
 }
 
-module.exports = {obtenerPedidos, obtenerUnPedido, modificarPedido}
+const crearPedido =  async (req,res) => {
+  const {pedidoId,usuarioID,fecha,comida,total} = req.body;
+
+  const nuevoPedido = new Pedido({
+    _id : pedidoId,
+    usuarioID,
+    fecha,
+    carrito: comida,
+    estado: "Pendiente",
+    total
+  })
+
+  await nuevoPedido.save()
+  
+
+  res.json({
+    mensaje: `Pedido ${pedidoId} creado con éxito`
+  })
+}
+
+module.exports = {obtenerPedidos, obtenerUnPedido, modificarPedido, crearPedido}

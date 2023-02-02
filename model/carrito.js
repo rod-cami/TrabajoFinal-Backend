@@ -4,7 +4,9 @@ const carrito = new Schema({
   nombrePlato: String,
   ingredientes: Array,
   precio: Number,
-  pedidoID: String
+  categoria: String,
+  pedidoID: String,
+  estado: String
 });
 
 module.exports = model('Carrito', carrito);
