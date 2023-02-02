@@ -1,18 +1,20 @@
 const express = require('express');
-const { obtenerCarritos } = require('../controllers/carrito');
+const { obtenerCarritos, borrarCarrito, modificarCarrito } = require('../controllers/carrito');
 const route = express.Router();
 const Carrito = require('../model/carrito');
 
 route.get('/obtenerCarrito', obtenerCarritos);
 
 route.post('/crearElementoCarrito', async (req,res) => {
-  const {nombrePlato,ingredientes,precio,pedidoID} = req.body;
+  const {nombrePlato,ingredientes,precio,categoria,pedidoID,estado} = req.body;
 
   const nuevoElementoCarrito = new Carrito({
     nombrePlato,
     ingredientes,
     precio,
-    pedidoID
+    categoria,
+    pedidoID,
+    estado
   })
 
   await nuevoElementoCarrito.save()
@@ -21,5 +23,9 @@ route.post('/crearElementoCarrito', async (req,res) => {
     mensaje: `Carrito ${pedidoID} creado con éxito`
   })
 })
+
+route.put('/modificarCarrito/:carritoId', modificarCarrito)
+route.delete('/borrarCarrito/:carritoID', borrarCarrito)
+
 
 module.exports = route;
