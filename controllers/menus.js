@@ -1,3 +1,4 @@
+const { validationResult } = require('express-validator');
 const Menu = require('../model/menus');
 
 const obtenerMenus = async (req,res) => {
@@ -13,6 +14,12 @@ const obtenerUnMenu = async (req,res) => {
 const crearMenu = async (req,res) => {
   const {nombre,estado,precio,detalle,ingredientes,categoria,imagen} = req.body;
   let arrayIngredientes = ingredientes.split(',')
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(401).json({ errors: errors.array() });
+  }
+
   const nuevoMenu = new Menu({
     nombre,
     estado,
@@ -32,6 +39,12 @@ const crearMenu = async (req,res) => {
 
 const modificarMenu = async (req,res) =>{
   const {_id,nombre,estado,precio,detalle,ingredientes,categoria,imagen} = req.body;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(401).json({ errors: errors.array() });
+  }
+  
   let arrayIngredientes = ingredientes.split(',')
   const menuMod = await Menu.findByIdAndUpdate(req.params.menuId, {
     _id,

@@ -24,4 +24,23 @@ const modificarCarrito = async (req,res) =>{
   res.json(userMod)
 }
 
-module.exports = {obtenerCarritos , obtenerUnCarrito, borrarCarrito,modificarCarrito} 
+const crearCarrito = async (req,res) => {
+  const {nombrePlato,ingredientes,precio,categoria,pedidoID,estado} = req.body;
+
+  const nuevoElementoCarrito = new Carrito({
+    nombrePlato,
+    ingredientes,
+    precio,
+    categoria,
+    pedidoID,
+    estado
+  })
+
+  await nuevoElementoCarrito.save()
+
+  res.json({
+    mensaje: `Carrito ${pedidoID} creado con éxito`
+  })
+}
+
+module.exports = {obtenerCarritos , obtenerUnCarrito, borrarCarrito,modificarCarrito, crearCarrito} 

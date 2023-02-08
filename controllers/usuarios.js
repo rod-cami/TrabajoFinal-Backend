@@ -1,6 +1,7 @@
 const User = require('../model/usuarios');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const { validationResult } = require('express-validator');
 
 const obtenerUsuarios= async (req,res) => {
   const usuarios = await User.find({});
@@ -15,6 +16,11 @@ const obtenerUnUsuario = async (req,res) => {
 const crearUsuario = async (req,res) => {
   const {nombre,apellido,email,password,estado,rol} = req.body;
   const result = await User.findOne({email});
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(401).json({ errors: errors.array() });
+  }
 
   if (result) {
     res.status(400).send({message : 'Ya existe un usuario con este email'})
@@ -58,6 +64,12 @@ const modificarUsuario = async (req,res) =>{
   const {nombre,apellido,email,estado,rol} = req.body;
   const result = await User.find({email:email});
   const result2 = await User.findById(req.params.userId)
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(401).json({ errors: errors.array() });
+  }
+
   
   if (result && email !== result2.email) {
     res.status(400).send({message : 'Ya existe un usuario con este email'})
@@ -83,6 +95,11 @@ const borrarUsuario = async (req,res) =>{
 const registrarUsuario = async (req,res) => {
   const {nombre,apellido,email,password} = req.body;
   const result = await User.findOne({email});
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(401).json({ errors: errors.array() });
+  }
 
   if (result) {
     res.status(400).send({message : 'Ya existe un usuario con este email'})
