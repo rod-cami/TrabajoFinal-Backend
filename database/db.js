@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
+
+const base = process.env.BASE;
 
 const connectDB = async () => {
   try {
-    await mongoose.connect('mongodb+srv://rod_cami:Base1234@proyectofinal.hpubysw.mongodb.net/?retryWrites=true&w=majority');
+    await mongoose.connect(base);
     console.log('Conectada')
   } catch (error) {
     console.log('No Conectada')
