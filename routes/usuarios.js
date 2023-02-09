@@ -41,7 +41,7 @@ route.post('/registrarUsuario',
     .not().isEmpty().isLength({min: 2 , max: 30})
     .withMessage('Error en Backend'), 
   check("email")
-    .trim().matches(/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/)
+    .trim().matches(/^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/)
     .not().isEmpty().isLength({min: 2 , max: 300})
     .withMessage('Error en Backend')
   ]
@@ -58,7 +58,7 @@ route.put('/modificarUsuario/:userId',
     .not().isEmpty().isLength({min: 2 , max: 25})
     .withMessage('Error en Backend'), 
   check("email")
-    .trim().matches(/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/)
+    .trim().matches(/^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/)
     .not().isEmpty().isLength({min: 2 , max: 300})
     .withMessage('Error en Backend')
   ]

@@ -24,8 +24,8 @@ route.post('/crearMenu',
     .not().isEmpty().isLength({min: 2 , max: 300})
     .withMessage('Error en Backend'), 
   check("imagen")
-    .trim().matches(/^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/)
-    .not().isEmpty().isLength({min: 2 , max: 300})
+    .trim().matches(/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/)
+    .not().isEmpty().isLength({min: 2 , max: 600})
     .withMessage('Error en Backend')], 
   crearMenu)
 route.put('/modificarMenu/:menuId', 
@@ -46,8 +46,8 @@ route.put('/modificarMenu/:menuId',
     .not().isEmpty().isLength({min: 2 , max: 300})
     .withMessage('Error en Backend'), 
   check("imagen")
-    .trim().matches(/^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/)
-    .not().isEmpty().isLength({min: 2 , max: 300})
+    .trim().matches(/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/)
+    .not().isEmpty().isLength({min: 2 , max: 600})
     .withMessage('Error en Backend')],
   modificarMenu)
 route.delete('/borrarMenu/:menuID', borrarMenu)

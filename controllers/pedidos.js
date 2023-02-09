@@ -23,7 +23,6 @@ const crearPedido =  async (req,res) => {
   const {pedidoId,usuarioID,fecha,comida,total} = req.body;
 
   const nuevoPedido = new Pedido({
-    _id : pedidoId,
     usuarioID,
     fecha,
     carrito: comida,

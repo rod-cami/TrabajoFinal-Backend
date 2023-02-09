@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose');
 
 const pedidos = new Schema({
-  _id: String,
   usuarioID: String,
   fecha: String,
   carrito: Array,
