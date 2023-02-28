@@ -3,7 +3,7 @@ const { obtenerMenus, obtenerUnMenu, crearMenu, modificarMenu, borrarMenu } = re
 const {check} = require('express-validator')
 const route = express.Router();
 
-// nombre,estado,precio,detalle,ingredientes,categoria,imagen
+
 route.get('/obtenerMenus', obtenerMenus);
 route.get('/obtenerUnMenu/:menuId', obtenerUnMenu);
 route.post('/crearMenu',
